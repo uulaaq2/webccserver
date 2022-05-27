@@ -23,7 +23,7 @@ const setSuccess = (data = null) => {
     return reply
 }
 
-const setWarning = (message) => {
+const setWarning = (message, data = null) => {
     return {
         status: 'warning',
         message: message

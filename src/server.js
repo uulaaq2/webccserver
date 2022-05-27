@@ -1,6 +1,6 @@
 import dotenv from 'dotenv'
 const path = require('path')
-dotenv.config({ path: '../.env' })
+dotenv.config({ path: path.join(__dirname, '..', '.env')})
 
 import express from 'express'
 import cors from 'cors'

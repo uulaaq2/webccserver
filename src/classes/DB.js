@@ -39,11 +39,7 @@ class DB {
                 // check if there is error
                 if (error) {
                     resolve(setError(error))
-                }
-
-                if (!results || results.length === 0) {
-                    resolve(setWarning('No record found'))
-                }
+                }   
 
                 // return results
                 let data = {

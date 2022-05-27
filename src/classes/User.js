@@ -21,7 +21,11 @@ class User {
 
             if (results.status === 'error') {
                 throw new Error(results.message)
-            }            
+            }
+
+            if (results.results.length === 0) {
+                return setWarning('Invalid email address or username')
+            }
 
             if (results.status !== 'ok'){
                 return results
@@ -29,7 +33,7 @@ class User {
 
             if (results.results.length > 1) {
                 return setWarning('Ambigious email address')
-            }
+            }           
 
             const data = {
                 user: results.results[0]
