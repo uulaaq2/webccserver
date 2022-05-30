@@ -5,6 +5,8 @@ import { headers } from '../options/corsOptions'
 import { setWarning, setSuccess, setError } from '../functions/setReply'
 import User from '../classes/User'
 
+export default router
+
 router.get('/', cors(), headers, function(req, res) {
   res.send('user page get');
 })
@@ -101,5 +103,3 @@ router.post('/me/verifytoken', cors(), headers, function(req, res) {
     res.send(setError(error))
   }
 })
-
-export default router

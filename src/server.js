@@ -12,7 +12,7 @@ import routerUser from './routes/user'
 const app = express();
 const port = process.env.APP_PORT || 3003
 
-app.use(express.static('public'))
+app.use(express.static('dist/public'))
 
 app.use(express.json());
 app.use(cors())

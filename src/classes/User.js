@@ -4,11 +4,13 @@ import sqlQueryBuilder from './SQLQueryBuilder'
 import Password from '../classes/Password'
 import Token from '../classes/Token'
 import axios from 'axios'
+import config from '../config'
+const fs = require('fs')
 
 class User {
 
     // start of getUserByEmail function
-    async getUserByEmail(emailAddress) {
+    async getUserByEmail(emailAddress, includePermissions = true) {
         try {
             const db = new DB()            
             const sqlQuery = new sqlQueryBuilder()            
@@ -38,6 +40,16 @@ class User {
             const data = {
                 user: results.results[0]
             }
+
+            let permissionsRawData, permissionsParsed            
+            if (includePermissions) {
+                permissionsRawData = fs.readFileSync(config.usersFolderPath + '/' + results.results[0].Email + '/permissions.json')
+                permissionsParsed = JSON.parse(permissionsRawData)
+
+                data.user.permissions = permissionsParsed
+            }      
+            
+            console.log(data)
             
             return setSuccess(data)
         // end of try
@@ -125,6 +137,7 @@ class User {
             if (tokenVerifiedResult.status !== 'ok') {
                 return tokenVerifiedResult
             }
+
 
             const data = {
                 token: tokenGeneratedResult.token,
